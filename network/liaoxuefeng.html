@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <main>
+        <section>
+            <h1>网络编程</h1>
+            <p>网络通信是两台计算机(客户端和服务端)上的两个进程的通信</p>
+            <p>网络编程就是在程序进程内，连接别的服务器进程的通信端口进行通信</p>
+        </section>
+        <section>
+            <h1>TCP/IP简介</h1>
+            <p>互联网通用连接协议中，最重要的两个协议tcp/ip</p>
+            <dl>
+                <dt>IP</dt>
+                <dd>
+                    <ul>
+                        <li>互联网每个计算机的唯一标识就是IP地址：123.132.132.131</li>
+                        <li>如果一台计算机接入多个网络，比如路由器，则有多个IP地址</li>
+                        <li>IP地址对应实际上是计算机的网络接口，通常是网卡</li>
+                    </ul>
+                </dd>
+                <dt>IP协议</dt>
+                <dd><ul>
+                    <li>IP协议把数据从一台计算机通过网络发送到另一台计算机</li>
+                    <li>数据被分割成小块，通过IP包发送出去</li>
+                    <li>两天计算机间经常多条线路，因此路由器负责如何把一个IP包转发出去</li>
+                    <li>IP包按块发送，途径多个路由，但不保证到达，不保证顺序到达</li>
+                </ul></dd>
+                <dt>IP地址</dt>
+                <dd>
+                    <ul>
+                        <li>IPV4地址，是一个32位整数，实际上按8位分组后的数字表示，便于阅读</li>
+                        <li>192.168.0.1</li>
+                        <li>IPV6地址，是一个128位整数，</li>
+                        <li>2001:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx</li>
+                    </ul>
+                </dd>
+                <dt>TCP协议</dt>
+                <dd>
+                    <ul>
+                        <li>TCP负责在两计算机之间建立可靠连接，确保数据IP包按顺序到达</li>
+                        <li>TCP通过握手协议建立连接，对每个IP包编号，确保顺序，如果丢包自动重发</li>
+                        <li>TCP报文除了包含要传输的数据，还有源IP地址，目标IP地址，源端口，目标端口</li>
+                        <li>端口是同一计算机上不同的网络程序的各自唯一端口号，用来区分网络连接的目标程序</li>
+                        <li>同一程序可与多个计算机连接，因此会申请很多端口</li>
+                    </ul>
+                </dd>
+            </dl>
+        </section>   
+        <section>
+            <h1>TCP编程</h1>
+            <dl>
+                <dt>Socket概念</dt>
+                <dd>一个Socket表示打开了一个网络连接，而一个Socket需要知道，目标计算机地址和端口号，再指定协议类型即可</dd>
+                <dt>客户端</dt>
+                <dd>
+                    <ul>
+                        <li>TCP连接都是客户端主动发起的，服务器被动响应连接</li>
+                        <li>建立一个Socket即创建一个客户端到服务器的TCP连接</li>
+                        <li>客户端发起TCP连接，必须知道服务器IP地址和端口号</li>
+                        <li>服务器端WEB服务器标准端口80，SMTP服务是25，FTP是21</li>
+                        <li>端口小于1024是Internet标准服务的端口，端口号大于1024可以任意使用</li>
+                    </ul>
+                </dd>
+            </dl>
+
+        </section>
+
+    </main>
+</body>
+</html>

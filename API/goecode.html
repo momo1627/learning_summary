@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map,#map1,#map2 {
+        height: 100%;
+        width: 50%;
+      }
+    
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+    <title>React App</title>
+  </head>
+  <body>
+      <section>
+          <h3>geocode api</h3>
+          <dl>
+              <dt>1.initMap function</dt>
+              <dd>创建map，并在googlemap Api调用</dd>
+              <dt>2.geocodeObject</dt>
+              <dd>设置geocode对象，建立request，并处理response</dd>
+              <dt>设置marker</dt>
+              <dt>设置infoWindow</dt>
+          </dl>
+      </section>
+    <form action="" id='geocode'>
+      <input type="text" placeholder="address" id='address'>
+      <input type="submit" placeholder="geocode" >
+    </form>  
+      <h3>Geocoder</h3>
+      <div id="map"></div>
+    <script>
+        //geocode处理函数，首先使用.geocode()方法初始化设置request，并设置回调函数处理response
+      function geocodeAddress(geocoder,targetMap,infoWindow){
+        var address = document.getElementById('address');
+        //geocoderObject.geocode({geocoderRequestParameterObject},callback(result,status)) initiates a request to the geocoding service
+        geocoder.geocode({'address':address.value,},(results,status)=>{
+          if(status == 'OK'){
+            targetMap.setCenter(results[0].geometry.location);
+            targetMap.setZoom(14);
+            var marker = new google.maps.Marker({
+              map:targetMap,
+              position:results[0].geometry.location
+            })
+            infoWindow.setContent(results[0].type[0])
+            infoWindow.open(targetMap,marker)
+          } else{
+            alert(`failed because ${status}`)
+          }
+        });
+      }
+      //在initMap函数里创建geocoder对象，map，infoWindow，并将三者作为参数调用geocode处理函数
+      function initMap(){
+        var geocoder = new google.maps.Geocoder();
+        var map = new google.maps.Map(document.getElementById('map'),{
+          zoom:8,
+          center:{lat:-34.397, lng: 150.644}
+        });
+        var infoWindow = new google.maps.InfoWindow;
+        document.getElementById('geocode').addEventListener('submit',(e)=>{
+          e.preventDefault();
+          geocodeAddress(geocoder,map,infoWindow)
+        })
+      }
+    </script>
+    <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC0W_7Xof88qi51CnXgWEJVSOxyJFeKzME&callback=initMap"
+    async defer></script>
+  </body>
+</html>
