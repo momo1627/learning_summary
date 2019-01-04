@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <main>
+        <section>
+            <h1>WEB</h1>
+            <dl>
+                <dt>HTTP和HTML</dt>
+                <dd>
+                    <ul>
+                        <li>服务器和浏览器之间传输内容是HTML网页代码</li>
+                        <li>HTTP是传输HTML的协议，负责浏览器和服务器的通信</li>
+                    </ul>
+                </dd>
+                <dt>Request Header</dt>
+                <dt>第一行</dt>
+                <dd>
+                    <ul>
+                        <li>GET /..：方法和路径</li>
+                        <li>HTTP/1.1：HTTP协议版本</li>
+                    </ul>
+                </dd>
+                <dt>第二行以后</dt>
+                <dd>
+                    第二行开始都是目标服务器的信息
+                </dd>
+                <dt>response Header</dt>
+                <dt>Header</dt>
+                <dd>
+                    <ul>
+                        <li>HTTP/1.1 状态码 状态</li>
+                        <li>Content-Type 相应内容，浏览器用来判断相应内容，而不是依靠url判断</li>
+                    </ul>
+                </dd>
+                <dt>Body</dt>
+                <dd>HTTP响应body就是HTML源码</dd>
+                <dd>当浏览器读取HTML源码即解析HTML显示网页</dd>
+            </dl>
+        </section>
+        <section>
+            <h1>HTTP流程</h1>
+            <dl>
+                <dt>1.浏览器向服务器发送HTTP请求</dt>
+                <dd>1.方法，2.路径，3.域名，4.其他header，5.post的数据body</dd>
+                <dt>2.服务器向浏览器返回HTTP响应</dt>
+                <dd>1.响应代码：200成功，3xx重定向，4xx客户端请求错误，5xx服务端吃力错误；2.响应类型Content-Type,3.其他header，4.body</dd>
+                <dt>3.重复其他请求，反复步骤1，2</dt>
+            </dl>
+            <p>HTTP请求一次只处理一个资源，http协议将html中插入其他服务器资源，将请求压力分散到各个服务器里</p>
+        </section>
+        <section>
+            <h1>http请求格式</h1>
+            <p>第一行，请求方法，路径，http协议</p>
+            <p>其他header通过\r\n\r\n换行符来分隔</p>
+            <h1>http响应格式</h1>
+            <p>第一行，相应代码，相应结果</p>
+            <p>其他header通过\r\n\r\n换行符来分隔</p>
+        </section>
+        <section>
+            <h1>WSGI接口</h1>
+            <p>Web服务需要Web Server Gateway Interface,实现一个函数，响应处理HTTP请求</p>
+            <p>通过WSGI接口，接受http请求，并处理返回响应给客户端</p>
+            <p>无论多复杂的web服务，入口都是wsgi处理函数接口，通过environ获得所有请求信息，返回body给客户端</p>
+            <p>WSGI内部处理TCP，HTTP原始请求和响应格式，这些底层操作不需要直接处理</p>
+            <p>复杂的web应用，WSGI接口仍然太底层，再wsgi之上还有web框架</p>
+        </section>
+        <section>
+            <h1>WEB框架</h1>
+            <p>WSGI框架针对每个http请求进行响应，但是针对一个URL的请求非常复杂</p>
+            <p>在WSGI框架之上进一步抽象，用一个函数处理一个URL</p>
+            <p>web框架编写web app必然比wsgi更简单</p>    
+        </section>
+    </main>
+</body>
+</html>
